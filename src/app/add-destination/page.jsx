@@ -23,7 +23,7 @@ const AddDestinationPage = () => {
          } )
        
          const  data =  await res.json()
-
+          
         }
       
     return (
