@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -12,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
 import { Button } from "@heroui/react";
+import EditModal from "@/components/EditModal";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -53,9 +55,7 @@ const DestinationDetailsPage = async ({ params }) => {
 
         {/* Action Buttons (Edit & Delete) */}
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="bordered" className="border-gray-200 hover:border-cyan-500 hover:text-cyan-600 text-gray-700 flex items-center gap-1.5 text-xs font-semibold rounded-xl">
-            <FaEdit className="text-xs" /> Edit
-          </Button>
+         <EditModal destinationData={destination} />
           <Button size="sm" variant="flat" color="danger" className="bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center gap-1.5 text-xs font-semibold rounded-xl">
             <FaTrash className="text-xs" /> Delete
           </Button>
@@ -71,7 +71,7 @@ const DestinationDetailsPage = async ({ params }) => {
           priority
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
         
         {/* Floating Location Badge */}
         <div className="absolute bottom-6 left-6">
