@@ -61,6 +61,11 @@ const SignUpPage = () => {
     }
   };
 
+   const handleGoogleSignin = async() =>{
+         await authClient.signIn.social({
+        provider: "google",
+     });
+   }
   return (
     <div className="min-h-[85vh] flex flex-col justify-center items-center py-12 px-4 bg-linear-to-b from-slate-50 via-cyan-50/20 to-slate-50">
       
@@ -193,7 +198,7 @@ const SignUpPage = () => {
           </div>
 
           {/* Google Button */}
-          <Button 
+          <Button onClick={handleGoogleSignin}
             type="button" 
             variant="flat"
             className="w-full border border-gray-200 hover:bg-gray-50/80 hover:border-gray-300 active:scale-[0.99] text-gray-700 font-medium py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 bg-white transition-all shadow-xs"
