@@ -5,7 +5,7 @@ import {
   FieldError, 
   Input, 
   Label, 
-  ListBox, 
+
   Modal, 
   Surface, 
   TextArea, 
@@ -18,15 +18,15 @@ const EditModal = ({ destinationData }) => {
  const onSubmit = async (e) => {
   e.preventDefault();
 
-  // 1. Form-er dynamic values extract kora
+
   const formData = new FormData(e.currentTarget);
   const updatedData = Object.fromEntries(formData.entries());
 
-  // 2. Data ashse kina check korar jonne log koro
+ 
   console.log("Form Submit Data:", updatedData);
 
   try {
-    // 3. Backend API Request
+
     const res = await fetch(`http://localhost:5000/destination/${destinationData?._id}`, {
       method: "PATCH",
       headers: {

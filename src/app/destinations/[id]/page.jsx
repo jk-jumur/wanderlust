@@ -6,14 +6,15 @@ import {
   FaRegCalendarAlt, 
   FaCheckCircle, 
   FaArrowLeft, 
-  FaEdit, 
-  FaTrash, 
+ 
+
   FaShieldAlt, 
   FaHeadset 
 } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
 import { Button } from "@heroui/react";
 import EditModal from "@/components/EditModal";
+import DeleteDialog from "@/components/DeleteDialog";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -56,9 +57,7 @@ const DestinationDetailsPage = async ({ params }) => {
         {/* Action Buttons (Edit & Delete) */}
         <div className="flex items-center gap-2">
          <EditModal destinationData={destination} />
-          <Button size="sm" variant="flat" color="danger" className="bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center gap-1.5 text-xs font-semibold rounded-xl">
-            <FaTrash className="text-xs" /> Delete
-          </Button>
+          <DeleteDialog destinationData={destination}/>
         </div>
       </div>
 
