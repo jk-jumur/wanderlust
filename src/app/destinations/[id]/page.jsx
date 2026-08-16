@@ -25,7 +25,8 @@ const DestinationDetailsPage = async ({ params }) => {
           authorization: "logged in"
       }
    });
-  const destination = await res.json();
+
+   const destination = await res.json();
 
   const {
     imageUrl,
