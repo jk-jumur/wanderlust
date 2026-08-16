@@ -8,10 +8,8 @@ import Link from "next/link";
 
 const Navbar = () => {
     const {
-       data: session,
-
-
-    } = authClient.useSession()
+       data: session,} = authClient.useSession()
+ 
       console.log(session)
       const user = session?.user
       console.log(user);

@@ -1,10 +1,42 @@
+"use client";
 import { Button } from "@heroui/react";
 import { FaCheckCircle, FaHeadset, FaShieldAlt } from "react-icons/fa";
-import DestinationCard from "./destinationCard";
+
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 
 const BookingCard = ({destination}) => {
-     const {price} = destination;
+       const {data: session} = authClient.useSession()
+      const user = session?.user
+             const [departureDate, setDepartureDate] = useState("2026-08-15")
+             const {price, _id, destinationName, imageUrl, country } = destination;
+              const handleBooking = async()=>{
+                    const bookingData = {
+                        userId: user?.id,
+                        userImage: user?.image,
+                        userName: user?.name,
+                        destinationId: _id,
+                        destinationName,
+                        price,
+                        imageUrl,
+                        country,
+                        departureDate: new Date(departureDate)
+                    }
+
+
+                      const res = await fetch('http://localhost:5000/booking', {
+                            method: "POST",
+                            headers: {
+                               "content-type": "application/Json"
+                            },
+                             body: JSON.stringify(bookingData)
+                      })
+
+                       const data = await res.json();
+                       console.log(data);
+              }
+
     return (
         <div className="lg:col-span-1">
                  <div className="sticky top-8 border border-cyan-100 bg-linear-to-b from-white via-cyan-50/20 to-white p-6 rounded-3xl shadow-xl shadow-cyan-900/5 space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -22,14 +54,17 @@ const BookingCard = ({destination}) => {
                    <div className="space-y-1.5">
                      <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Select Date</label>
                      <input
+                       
                        type="date"
-                       defaultValue="2026-08-15"
+                       value={departureDate || ""}
+                       onChange={(e) => setDepartureDate(e.target.value)}
                        className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-700 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 bg-white shadow-sm transition-all"
                      />
                    </div>
        
                    {/* Book Now Button */}
                    <Button
+                     onClick={handleBooking}
                      className="w-full bg-cyan-600 hover:bg-cyan-700 active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition-all text-sm shadow-md shadow-cyan-600/20"
                    >
                      Book Now →
