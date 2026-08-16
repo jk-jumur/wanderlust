@@ -20,7 +20,11 @@ const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
 
   // API call to fetch single destination details
-  const res = await fetch(`http://localhost:5000/destination/${id}`, { cache: "no-store" });
+  const res = await fetch(`http://localhost:5000/destination/${id}`, {
+      headers: {
+          authorization: "logged in"
+      }
+   });
   const destination = await res.json();
 
   const {
